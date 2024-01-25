@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import subprocess as sp
-import os
 
 biolqm = "/home/nadine/Documents/3.Scripts/biolqm.sh"# Biolqm command
 model = "/home/nadine/Documents/1.Model&Simulations/2.Leonard_Model/Model/PMP/ASYN.bnet" # Location of the BN model
