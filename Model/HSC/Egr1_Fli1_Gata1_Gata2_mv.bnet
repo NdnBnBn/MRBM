@@ -1,0 +1,23 @@
+# model in BoolNet format
+# the header targets, factors is mandatory to be importable in the R package BoolNet
+
+targets, factors
+Bclaf1,    Myc
+CDK46CycD, !Bclaf1&Myc | Bclaf1
+CIPKIP,    Junb
+Cebpa,     !Gata2_b1&Spi1&!Ikzf1 | Gata2_b1&!Ikzf1
+Egr1_b1,   !Egr1_b1&Junb&Gata2_b1 | Egr1_b1&!Egr1_b2&Junb&Gata2_b1 | Egr1_b1&Egr1_b2
+Egr1_b2,   Egr1_b1&Junb&Gata2_b1
+Fli1_b1,   !Junb&!Fli1_b1&Gata1_b1&Gata1_b2&!Klf1 | !Junb&Fli1_b1&!Fli1_b2&Gata1_b1&Gata1_b2&!Klf1 | !Junb&Fli1_b1&Fli1_b2 | Junb
+Fli1_b2,   !Junb&Fli1_b1&Gata1_b1&Gata1_b2&!Klf1 | Junb&Fli1_b1
+Gata1_b1,  !Fli1_b1&!Gata2_b1&!Spi1&Gata1_b1&!Gata1_b2&!Ikzf1 | !Fli1_b1&!Gata2_b1&!Spi1&Gata1_b1&Gata1_b2 | !Fli1_b1&!Gata2_b1&Spi1&Gata1_b1&Gata1_b2 | !Fli1_b1&Gata2_b1&!Spi1 | !Fli1_b1&Gata2_b1&Spi1&Gata1_b1&Gata1_b2 | Fli1_b1
+Gata1_b2,  !Fli1_b1&!Gata2_b1&!Spi1&Gata1_b1&!Ikzf1 | !Fli1_b1&Gata2_b1&!Spi1&Gata1_b1 | Fli1_b1&Gata1_b1
+Gata2_b1,  !Egr1_b1&Gata2_b1&!Gata2_b2&!Gata1_b1&!Zfpm1 | !Egr1_b1&Gata2_b1&Gata2_b2 | Egr1_b1&!Gata2_b1&!Spi1&!Gata1_b1&!Zfpm1 | Egr1_b1&Gata2_b1&!Gata2_b2&!Gata1_b1&!Zfpm1 | Egr1_b1&Gata2_b1&Gata2_b2
+Gata2_b2,  Gata2_b1&!Gata1_b1&!Zfpm1
+Ikzf1,     Gata2_b1
+Junb,      !Egr1_b1&Myc | Egr1_b1&!Egr1_b2&Myc | Egr1_b1&Egr1_b2
+Klf1,      !Fli1_b1&Gata1_b1 | Fli1_b1&!Fli1_b2&Gata1_b1
+Myc,       Bclaf1&Cebpa
+Spi1,      !Gata2_b1&!Spi1&Cebpa&!Gata1_b1 | !Gata2_b1&Spi1&!Gata1_b1 | Gata2_b1&!Gata2_b2&!Spi1&Cebpa&!Gata1_b1 | Gata2_b1&!Gata2_b2&Spi1&!Gata1_b1 | Gata2_b1&Gata2_b2&Spi1&!Gata1_b1
+Tal1,      !Spi1&Gata1_b1
+Zfpm1,     Gata1_b1
