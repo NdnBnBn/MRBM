@@ -2,12 +2,12 @@
 
 import subprocess as sp
 
-biolqm = "/home/nadine/Documents/3.Scripts/biolqm.sh"# Biolqm command
-model = "/home/nadine/Documents/1.Model&Simulations/2.Leonard_Model/Model/PMP/ASYN.bnet" # Location of the BN model
-path = "/home/nadine/Documents/1.Model&Simulations/2.Leonard_Model/Model" # Path of the resulting J mp model
+biolqm = "biolqm.sh"# Biolqm command
+model = "Model/HSC/ASYN.bnet" # Location of the BN model
+path = "Model/HSC" # Path of the resulting J mp model
 
 
-file_path = "/home/nadine/Documents/1.Model&Simulations/2.Leonard_Model/ML_two_pMP_comb.txt"
+file_path = "HSC/HSC_two_pMP_comb.txt"
 with open(file_path) as f:
     J = [line.strip() for line in f] # List of sets J¨
 
