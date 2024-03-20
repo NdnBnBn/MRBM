@@ -1,0 +1,164 @@
+[
+    {
+        "min_trap_space": {
+            "str": "101010001010111011",
+            "dict": {
+                "XAL1": 1,
+                "WOX5": 1,
+                "SHY2": 0,
+                "SHR": 1,
+                "SCR": 1,
+                "PLT": 1,
+                "PHB": 0,
+                "MIR166": 1,
+                "MGP": 0,
+                "JKD": 1,
+                "CLE40": 0,
+                "CK": 0,
+                "AUXIAA": 0,
+                "AUX": 1,
+                "ARR1": 0,
+                "ARF5": 1,
+                "ARF10": 0,
+                "ARF": 1
+            },
+            "prop": "ARF&!ARF10&ARF5&!ARR1&AUX&!AUXIAA&!CK&!CLE40&JKD&!MGP&MIR166&!PHB&PLT&SCR&SHR&!SHY2&WOX5&XAL1",
+            "is_univocal": "yes",
+            "is_faithful": "yes"
+        },
+        "state": {
+            "str": "101010001010111011",
+            "dict": {
+                "ARF": 1,
+                "ARF10": 0,
+                "ARF5": 1,
+                "ARR1": 0,
+                "AUX": 1,
+                "AUXIAA": 0,
+                "CK": 0,
+                "CLE40": 0,
+                "JKD": 1,
+                "MGP": 0,
+                "MIR166": 1,
+                "PHB": 0,
+                "PLT": 1,
+                "SCR": 1,
+                "SHR": 1,
+                "SHY2": 0,
+                "WOX5": 1,
+                "XAL1": 1
+            },
+            "prop": "ARF&!ARF10&ARF5&!ARR1&AUX&!AUXIAA&!CK&!CLE40&JKD&!MGP&MIR166&!PHB&PLT&SCR&SHR&!SHY2&WOX5&XAL1"
+        },
+        "is_steady": true,
+        "is_cyclic": false
+    },
+    {
+        "min_trap_space": {
+            "str": "111010000010101001",
+            "dict": {
+                "XAL1": 1,
+                "WOX5": 0,
+                "SHY2": 0,
+                "SHR": 1,
+                "SCR": 0,
+                "PLT": 1,
+                "PHB": 0,
+                "MIR166": 1,
+                "MGP": 0,
+                "JKD": 0,
+                "CLE40": 0,
+                "CK": 0,
+                "AUXIAA": 0,
+                "AUX": 1,
+                "ARR1": 0,
+                "ARF5": 1,
+                "ARF10": 1,
+                "ARF": 1
+            },
+            "prop": "ARF&ARF10&ARF5&!ARR1&AUX&!AUXIAA&!CK&!CLE40&!JKD&!MGP&MIR166&!PHB&PLT&!SCR&SHR&!SHY2&!WOX5&XAL1",
+            "is_univocal": "yes",
+            "is_faithful": "yes"
+        },
+        "state": {
+            "str": "111010000010101001",
+            "dict": {
+                "ARF": 1,
+                "ARF10": 1,
+                "ARF5": 1,
+                "ARR1": 0,
+                "AUX": 1,
+                "AUXIAA": 0,
+                "CK": 0,
+                "CLE40": 0,
+                "JKD": 0,
+                "MGP": 0,
+                "MIR166": 1,
+                "PHB": 0,
+                "PLT": 1,
+                "SCR": 0,
+                "SHR": 1,
+                "SHY2": 0,
+                "WOX5": 0,
+                "XAL1": 1
+            },
+            "prop": "ARF&ARF10&ARF5&!ARR1&AUX&!AUXIAA&!CK&!CLE40&!JKD&!MGP&MIR166&!PHB&PLT&!SCR&SHR&!SHY2&!WOX5&XAL1"
+        },
+        "is_steady": true,
+        "is_cyclic": false
+    },
+    {
+        "min_trap_space": {
+            "str": "111110110010100001",
+            "dict": {
+                "XAL1": 1,
+                "WOX5": 0,
+                "SHY2": 0,
+                "SHR": 0,
+                "SCR": 0,
+                "PLT": 1,
+                "PHB": 0,
+                "MIR166": 1,
+                "MGP": 0,
+                "JKD": 0,
+                "CLE40": 1,
+                "CK": 1,
+                "AUXIAA": 0,
+                "AUX": 1,
+                "ARR1": 1,
+                "ARF5": 1,
+                "ARF10": 1,
+                "ARF": 1
+            },
+            "prop": "ARF&ARF10&ARF5&ARR1&AUX&!AUXIAA&CK&CLE40&!JKD&!MGP&MIR166&!PHB&PLT&!SCR&!SHR&!SHY2&!WOX5&XAL1",
+            "is_univocal": "yes",
+            "is_faithful": "yes"
+        },
+        "state": {
+            "str": "111110110010100001",
+            "dict": {
+                "ARF": 1,
+                "ARF10": 1,
+                "ARF5": 1,
+                "ARR1": 1,
+                "AUX": 1,
+                "AUXIAA": 0,
+                "CK": 1,
+                "CLE40": 1,
+                "JKD": 0,
+                "MGP": 0,
+                "MIR166": 1,
+                "PHB": 0,
+                "PLT": 1,
+                "SCR": 0,
+                "SHR": 0,
+                "SHY2": 0,
+                "WOX5": 0,
+                "XAL1": 1
+            },
+            "prop": "ARF&ARF10&ARF5&ARR1&AUX&!AUXIAA&CK&CLE40&!JKD&!MGP&MIR166&!PHB&PLT&!SCR&!SHR&!SHY2&!WOX5&XAL1"
+        },
+        "is_steady": true,
+        "is_cyclic": false
+    }
+]
