@@ -15,14 +15,14 @@ The inits, attrs, and reach dictionaries are essential to asses the presence of 
 
 ### Prerequisites
 Python packages:
-  - pyboolnet
-  - minibn
-  - biolqm
-  - mpbn
+  - `pyboolnet`
+  - `minibn`
+  - `biolqm`
+  - `mpbn`
 
 Java package:
-  - Biolqm
+  - `Biolqm`
 
 All necessary package needed can be retrived using the yml file mrbm.yml:
-  - Installation: conda env create -f mrbm.yml
+  - Installation: `conda env create -f mrbm.yml`
   - Activation: `conda activate mrbm`
