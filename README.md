@@ -20,7 +20,7 @@ Python packages:
   - `biolqm`
   - `mpbn`
 
-Java package:
+Java toolkit:
   - `Biolqm`
 
 All necessary package needed can be retrived using the yml file mrbm.yml:
