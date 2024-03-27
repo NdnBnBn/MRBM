@@ -22,6 +22,7 @@ Python packages:
 
 Java package:
   - Biolqm
+
 All necessary package needed can be retrived using the yml file mrbm.yml:
   - Installation: conda env create -f mrbm.yml
   - Activation: `conda activate mrbm`
