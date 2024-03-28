@@ -33,7 +33,7 @@ You will also need the BM in a `.bnet` format.
 Both files need to be in the MRBM dictory.
 
 ### Identification of multivalued node(s)
-Run the code using the following arguments:
+Run the code `1.multivalued_nodes_identification.py` using the following arguments:
 
     - mn, --model_name     enter model_name
     - p {b,r}, --property {b,r}     define wheather you want check sepecific reachability (r) or check the basin of attractions (b)                   
@@ -42,9 +42,8 @@ Run the code using the following arguments:
 
 ### Identification of multivalued refinement(s)
 
-Run the code using the following arguments: `2.refinement_identification.py`
+Run the code `2.refinement_identification.py` using the following arguments: 
 
-    - h, --help            show this help message and exit
     - mn, --model_name      enter model_name
     - p {b,r}, --property {b,r}     define wheather you want check sepecific reachability (r) or check the basin of attractions (b)                  
     - m {p,c}, --method {p,c}       method to generate multivalued refinement(s), path analysis (p) or test every possible parameterization (c)                   
