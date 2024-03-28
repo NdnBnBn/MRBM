@@ -33,37 +33,20 @@ You will also need the BM in a `.bnet` format.
 Both files need to be in the MRBM dictory.
 
 ### Identification of multivalued node(s)
+Run the code using the following arguments:
 
-optional arguments:
-
-  -h, --help            show this help message and exit
-  
-  -mn MODEL_NAME, --model_name MODEL_NAME
-                        enter model_name
-                        
-  -p {b,r}, --property {b,r}
-                        define wheather you want check sepecific reachability (r) or check the basin of attractions (b)
-                        
-  -M MAX, --MAX MAX     maximal number of m.p. nodes
+    - mn, --model_name     enter model_name
+    - p {b,r}, --property {b,r}     define wheather you want check sepecific reachability (r) or check the basin of attractions (b)                   
+    - M MAX, --MAX MAX     maximal number of m.p. nodes
 
 
 ### Identification of multivalued refinement(s)
 
-usage: 2.refinement_identification.py [-h] [-mn MODEL_NAME] [-p {b,r}] [-m {p,c}] [-dj {y,n}] [-nm NEW_MJ]
+Run the code using the following arguments: `2.refinement_identification.py`
 
-optional arguments:
-  -h, --help            show this help message and exit
-  
-  -mn MODEL_NAME, --model_name MODEL_NAME
-                        enter model_name
-  -p {b,r}, --property {b,r}
-                        define wheather you want check sepecific reachability (r) or check the basin of attractions (b)
-                        
-  -m {p,c}, --method {p,c}
-                        method to generate multivalued refinement(s), path analysis (p) or test every possible parameterization (c)
-                        
-  -dj {y,n}, --default_mj {y,n}
-                        (y) the default maximal level if 2. if not provide new mj value (-nm)
-                        
-  -nm NEW_MJ, --new_mj NEW_MJ
-                        dictionnary of the new maximal value for each node {'mv nod':'mj value',...}`
+    - h, --help            show this help message and exit
+    - mn, --model_name      enter model_name
+    - p {b,r}, --property {b,r}     define wheather you want check sepecific reachability (r) or check the basin of attractions (b)                  
+    - m {p,c}, --method {p,c}       method to generate multivalued refinement(s), path analysis (p) or test every possible parameterization (c)                   
+    - dj {y,n}, --default_mj {y,n} (y)      the default maximal level if 2. if not provide new mj value (-nm)                   
+    - nm, --new_mj      dictionnary of the new maximal value for each node {'mv nod':'mj value',...}`
