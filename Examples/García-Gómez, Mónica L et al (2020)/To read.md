@@ -1,4 +1,4 @@
-# Identification of multivalued refinements of the model of stem cell division in the Root of Arabidopsis thaliana
+# Identification of Multivalued Refinements of the Boolean Model of Asymmetric Stem Cell Division in *Arabidopsis Thaliana* Root
 
 To run the code the “inputs.py”  and “ASYN.bnet” files must be in the MRBM folder. 
 
