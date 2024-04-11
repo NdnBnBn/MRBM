@@ -49,11 +49,10 @@ You will obtain the following outputs regardless of the property "p" tested:
 
 And the following output according to the value p:
 
-| With p = reachability  | With p = basin of attraction |
+| With p = basin of attraction | With p = reachability |
 | ---------------------- | ---------------------------- |
 | **model_name_TARGET_MP_BASIN.txt** : List of configuration of attractors and the size of the basin of attraction that are different between the asynchronous and mp dynamics | **model_name_TARGET_REACH.txt** : List of reachabilities that are different between the asynchronous and mp dynamics |
 | **model_name_SS.json** : dict of the attractors configuration whose size we want to recover| **model_name_REACH_RES.txt**: dict of the reachabilities we want to recover|
-| | **model_name_differences.txt** : reachability result that we expect|
 
 ### Identification of multivalued refinement(s)
 
