@@ -44,8 +44,8 @@ Examples:
 - `python 1.multivalued_nodes_identification.py -mn model_name -p b -M 5`
 
 You will obtain the following outputs regardless of the property "p" tested:
-- **model_name_FINAL_PARTIAL_SETS_J.txt** : List of sets J that allow to recover part of the basin of attraction sizes |
-- **model_name_FINAL_SETS_J.txt** : List of set J that recover all the desired basin of attraction size |
+- **model_name_FINAL_PARTIAL_SETS_J.txt** : Dictionary giving the recovered property (basin or reachablity) and the sets J that allow to recover it
+- **model_name_FINAL_SETS_J.txt** : List of set J that recover the total property (basin or reachablity)
 
 And the following output according to the value p:
 
@@ -60,6 +60,7 @@ Run the code `2.refinement_identification.py` using the following arguments:
 - mn: model name
 - p: define whether you want to check specific reachability (r) or check the basin of attractions (b)
 - m: method to generate multivalued refinement(s), path analysis (p) or test every possible parameterization (c)
+- j: path to the setJ of nodes to be multivalued  -> path to **model_name_FINAL_SETS_J.txt**, or part of the file **model_name_FINAL_PARTIAL_SETS_J.txt**. In the second case, the file must contain one entry of the form {"property to recover": list of set J}. 
 
 Do not change the following parameter if you use the path analysis:
 - dj: the default maximal level is 2 (y). If you want to change it (n) provide new mj value (nm) 
