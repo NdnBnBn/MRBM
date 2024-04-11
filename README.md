@@ -32,7 +32,7 @@ The "inits", "attrs", and "reach" dictionaries are essential to assess the prese
 You will also need the BM in a `.bnet` format renamed `ASYN.bnet`.
 Both files (the model and the inputs file) need to be in the MRBM directory.
 
-### Identification of multivalued node(s)
+## Identification of multivalued node(s)
 Run the code `1.multivalued_nodes_identification.py` using the following arguments:
 
 - mn: model name
@@ -54,7 +54,7 @@ And the following output according to the value p:
 | **model_name_TARGET_MP_BASIN.txt** : List of configuration of attractors and the size of the basin of attraction that are different between the asynchronous and mp dynamics | **model_name_TARGET_REACH.txt** : List of reachabilities that are different between the asynchronous and mp dynamics |
 | **model_name_SS.json** : dict of the attractors configuration whose size we want to recover| **model_name_REACH_RES.txt**: dict of the reachabilities we want to recover|
 
-### Identification of multivalued refinement(s)
+## Identification of multivalued refinement(s)
 
 Run the code `2.refinement_identification.py` using the following arguments: 
 - mn: model name
