@@ -14,7 +14,7 @@ python 1.multivalued_nodes_identification.py -mn ML -p r
 
 **Goal:**
 
-We want to find a multivalued refinement (a more detailed model) that can capture target reachabilities (possible transitions between states) defined in the "inputs.py" file. These reachabilities can only be observed in the most permissive (m.p.) dynamics of the Boolean model.
+We want to find a multivalued refinement that can capture target reachabilities (possible transitions between states) defined in the "inputs.py" file. These reachabilities can only be observed in the most permissive (m.p.) dynamics of the Boolean model.
 
 First, we need to identify the set of nodes (J) that are sufficient to recover the target reachabilities in the partial J m.p. dynamics. We use the script `1.multivalued_nodes_identification.py` to achieve this.
 
