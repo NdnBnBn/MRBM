@@ -42,6 +42,9 @@ args = parser.parse_args()
 
 CDIR = os.getcwd()
 
+#args.property = "r"
+#args.MAX = [4,4]
+#args.model_name = "ML"
 #==============================================================================
 # Loading the Boolean model with possible mutation stored in an inputs.py file
 #==============================================================================
@@ -149,15 +152,16 @@ ADMISSIBLE_NODE = [item for item in PRIMES_ASYN if item not in OUTPUTS and item 
 FINAL_SETS_J = []
 PARTIAL_SETS_J = {}
 IDX = 0
+if type(args.MAX) == int:
+    RANGE = range(1, args.MAX+1)
+elif type(args.MAX) == list:
+    RANGE = range(args.MAX[0], args.MAX[1]+1)
+
 if NEXT:
     CMD_BIOLQM = CDIR + "/biolqm.sh"
     JMP_DIR = CDIR + "/JMP_Models"
     if not os.path.exists(JMP_DIR):
         os.mkdir(JMP_DIR)
-    if type(args.MAX) == int:
-        RANGE = range(1, args.MAX+1)
-    elif type(args.MAX) == list:
-        RANGE = range(args.MAX[0], args.MAX[1]+1)
     for m in RANGE:
         SETS_J = list(combinations(ADMISSIBLE_NODE, m))
         for j in SETS_J:
@@ -171,7 +175,7 @@ if NEXT:
                 else:
                     prime_implicants.create_constants(JMP_MODEL, {g:v})
 
-            if property == "b":
+            if args.property == "b":
                 JMP_BOA = basin(JMP_NAME, JMP_MODEL, SS, "mp", SIZE)
                 print("PMP "+str(IDX))
                 IDX += 1
@@ -189,7 +193,7 @@ if NEXT:
                             PARTIAL_SETS_J[N].append(j)
                 else: os.remove(PATH)
 
-            if property == "r":
+            if args.property == "r":
                 JMP_REACH = reachability(JMP_NAME, TARGET_REACH, JMP_MODEL, "mp")
                 print("PMP "+str(IDX))
                 IDX += 1
