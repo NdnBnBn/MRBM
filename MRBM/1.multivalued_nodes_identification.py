@@ -29,15 +29,14 @@ from mrbm import minimize_dict
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-mn", "--model_name",
-                    help="enter model_name",
+                    help="Enter model name",
                     type=str)
 parser.add_argument("-p", "--property",
-                    help="define wheather you want check sepecific reachability (r) or check the basin of attractions (b)",
+                    help="Define wheather you want check sepecific reachability (r) or check the basin of attractions (b)",
                     type=str,
                     choices=["b", "r"])
 parser.add_argument("-M", "--MAX",
-                    help="maximal number of m.p. nodes",
-                    type=int,
+                    help="Range of m.p. nodes to test, either give a MAX (default  MAX = 5) value, or the [MIN, MAX] range",
                     default=5)
 args = parser.parse_args()
 
@@ -147,12 +146,6 @@ SELF_NO = [i for i in PRIMES_ASYN if f"!{i}" in str(BNA[i])]
 OUTPUTS = prime_implicants.find_outputs(PRIMES_ASYN)
 ADMISSIBLE_NODE = [item for item in PRIMES_ASYN if item not in OUTPUTS and item not in SELF_NO]
 
-#NEW_MAX = input("Do you want to test more than 5 mp node? (y/n): \n")
-#if NEW_MAX == "y":
-#    NEW = input("Give a new value: \n")
-#    MAX = min(len(BNA), int(NEW))
-#else: MAX = min(len(BNA), 5)
-
 FINAL_SETS_J = []
 PARTIAL_SETS_J = {}
 IDX = 0
@@ -161,7 +154,11 @@ if NEXT:
     JMP_DIR = CDIR + "/JMP_Models"
     if not os.path.exists(JMP_DIR):
         os.mkdir(JMP_DIR)
-    for m in range(1, args.MAX+1):
+    if type(args.MAX) == int:
+        RANGE = range(1, args.MAX+1)
+    elif type(args.MAX) == list:
+        RANGE = range(args.MAX[0], args.MAX[1]+1)
+    for m in RANGE:
         SETS_J = list(combinations(ADMISSIBLE_NODE, m))
         for j in SETS_J:
             JMP_NAME = '_'.join(j)
@@ -184,7 +181,7 @@ if NEXT:
                         FINAL_SETS_J.append(j)
                     else:
                         N = [item[0] for item in IDC]
-                        N = "_".join(N)
+                        N = "-".join(N)
                         if PARTIAL_SETS_J.get(N) is None:
                             PARTIAL_SETS_J[N] = []
                             PARTIAL_SETS_J[N].append(j)
@@ -202,7 +199,7 @@ if NEXT:
                         FINAL_SETS_J.append(j)
                     else:
                         N = [item[0] for item in IDC]
-                        N = "_".join(N)
+                        N = "-".join(N)
                         if PARTIAL_SETS_J.get(N) is None:
                             PARTIAL_SETS_J[N] = []
                             PARTIAL_SETS_J[N].append(j)
