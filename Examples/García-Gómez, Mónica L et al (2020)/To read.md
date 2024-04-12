@@ -22,5 +22,5 @@ We identified only one set J for which the partial Jm.p. dynamics led to the siz
 We used all of those sets J in the second part to identify a multivalued refinement whose asynchronous dynamics would lead to the target size of basin of attraction. In those models, the sets J correspond to the multivalued nodes.
 
 ## Identification of multivalued refinement(s)
-Outputs obtained are used as inputs to run the following command: `python 2.refinement_identification.py -mn AT -p b -m c`. 
-We run this command for several sets J (change path to the file containing the set J to test) and test every possible parameterization of multivalued refinement to check if their asynchronous dynamics leads to the target size of basin of attraction. We run the test with a maximal level of activity for a multivalued node equal to 2.
+Run the following command: `python 2.refinement_identification.py -mn AT -p b -m c`. 
+We run this command for several sets J (change path to the file containing the set J to test) in order to test every possible parameterization of multivalued refinements to check if their asynchronous dynamics leads to the target size of basin of attraction. We run the test with a maximal level of activity for a multivalued node equal to 2 (it's the default).
