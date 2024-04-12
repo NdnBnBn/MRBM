@@ -37,7 +37,7 @@ Run the code `1.multivalued_nodes_identification.py` using the following argumen
 
 - mn: model name
 - p: define whether you want to check specific reachability (r) or check the basin of attractions (b)
-- M: maximal number of m.p. nodes
+- M: maximal number of m.p. nodes, 5 by default. Can be either a number or a range of the form [min, max]
 
 Examples: 
 - `python 1.multivalued_nodes_identification.py -mn model_name -p r -M 5`
