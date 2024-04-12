@@ -58,18 +58,18 @@ This file contains regulatory functions that describe the activation conditions 
 
 According to the file "ML_path_generated_rules.txt" and the reulatory functions of the original Boolean model several alteration in the regulation of node target by multivalued node can be made. In the following list we define the possible thresholw at which the regulatorion by a multivalued node can occur. If its kept at 1 (like in the Boolean model), it is signaled by "No change":
 
-* **Cebpa:** No change
-* **Egr1:** Gata2 activates Egr1 at level 2
-* <code style="color : green"> **Fli1:** Gata1 activated Fli1 at level 2 </code>
-* **Gata1:** No change
-* **Gata2:** No change
-* **Ikzf1:** Gata2 activates Ikzf1 at level 2
-* <code style="color : green"> **Junb:** Egr1 activates Junb at level 2 </code>
-* <code style="color : green"> **Klf1:** Fli1 inhibit Klf1 at level 2 </code>
-* <code style="color : green"> **Spi1:** The inhibition by Gata1 and Gata2 occur at level 2 </code>
-* **Tal1:** Gata1 activates Tal1 at level 2
-* **Zfpm1:** No change
+* Cebpa: No change
+* Egr1: Gata2 activates Egr1 at level 2
+* **Fli1: Gata1 activated Fli1 at level 2 }**
+* Gata1: No change
+* Gata2: No change
+* Ikzf1: Gata2 activates Ikzf1 at level 2
+* **Junb: Egr1 activates Junb at level 2**
+* **Klf1: Fli1 inhibit Klf1 at level 2**
+* **Spi1: The inhibition by Gata1 and Gata2 occur at level 2**
+* Tal1: Gata1 activates Tal1 at level 2
+* Zfpm1: No change
 
 ### Validation and Minimal Refinement
 
-These suggested changes were tested in a simulation, and they successfully recovered the reachability of interest. We proceded to find the minimal multivalued refinement needed. This involved reducing the changes (setting the threshold of regulation back to 1) one by one and checking if  reachabilities were lost. This iterative process helped us identify the essential modifications required. The final model include only those changes (colored in green in the previous list). 
+These suggested changes were tested in a simulation, and they successfully recovered the reachability of interest. We proceded to find the minimal multivalued refinement needed. This involved reducing the changes (setting the threshold of regulation back to 1) one by one and checking if  reachabilities were lost. This iterative process helped us identify the essential modifications required. The final model include only those changes (written in bold in the previous list). 
