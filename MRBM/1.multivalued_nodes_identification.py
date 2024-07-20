@@ -42,9 +42,9 @@ args = parser.parse_args()
 
 CDIR = os.getcwd()
 
-args.property = "r"
+#args.property = "r"
 #args.MAX = [4,4]
-args.model_name = "ML"
+#args.model_name = "ML"
 #==============================================================================
 # Loading the Boolean model with possible mutation stored in an inputs.py file
 #==============================================================================
