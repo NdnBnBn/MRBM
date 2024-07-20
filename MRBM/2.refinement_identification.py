@@ -68,11 +68,11 @@ if not os.path.exists(MV_DIR):
 if not os.path.exists(temp):
     os.mkdir(temp)
 
-args.model_name = "ML"
-args.property = "r"
-args.method = "p"
-args.default_mj = "y"
-args.setj = f"{args.model_name}_FINAL_SETS_J.txt"
+#args.model_name = "ML"
+#args.property = "r"
+#args.method = "p"
+#args.default_mj = "y"
+#args.setj = f"{args.model_name}_FINAL_SETS_J.txt"
 
 
 # Loading results from the set J identification
