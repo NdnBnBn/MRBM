@@ -16,6 +16,7 @@ from pyboolnet import prime_implicants
 from pyboolnet.prime_implicants import find_predecessors
 from pyboolnet.state_space import state2dict
 from pyboolnet.boolean_logic import minimize_espresso
+from pyboolnet.boolean_normal_forms import get_dnf
 import os
 
 def mv_models_initialisation(setJ, bna, mj_list):
@@ -115,8 +116,8 @@ def bool_to_jmp(state, node):
     return states
 
 def bool_to_mv(state, node, mj_list):
-    """ This function translate any Boolean state (in dict format) in a most
-    multivalued state with m being a list of multivalued permissve nodes
+    """ This function translate any Boolean state (in dict format) in a
+    multivalued state with mj_list being a list of multivalued nodes
     """
     states = copy.deepcopy(state)
     for k, mj in zip(node.split("_"), mj_list):
@@ -125,6 +126,31 @@ def bool_to_mv(state, node, mj_list):
             for suffix in [f"_b{i}" for i in range(1, mj + 1)]:
                 states[k + suffix] = v
             del states[k]
+    return states
+
+def jmp_to_jmp(state):
+    states = copy.deepcopy(state)
+    for k in list(states.keys()):
+        if k.endswith("_c"):
+            k = k[:-2]
+            a, b, c = (states[k + "_a"], states[k + "_b"], states[k + "_c"])
+            code_map = {(0, 0, 0): 0,
+                        (1, 1, 1): 1,
+                        (1, 0, 0): 0,
+                        #(1, 1, 0): "d",
+                        (0, 1, 1): 1,
+                        (0, 0, 1): "i",
+                        (1, 0, 1): "d"
+                        #(0, 1, 0): "i"
+                        }
+
+            states[k] = code_map.get((a, b, c), states.get(k))
+
+            # Delete the old keys
+            del states[k + "_a"]
+            del states[k + "_b"]
+            del states[k + "_c"]
+
     return states
 
 def jmp_to_mv(state, node, mj):
@@ -139,11 +165,12 @@ def jmp_to_mv(state, node, mj):
             code_map = {(0, 0, 0): 0,
                         (1, 1, 1): mj,
                         (1, 0, 0): 1,
-                        (1, 1, 0): "?",
+                        #(1, 1, 0): "?", #artmj
                         (0, 1, 1): 1,
                         (0, 0, 1): 1,
-                        (1, 0, 1): 1,
-                        (0, 1, 0): "?"}
+                        (1, 0, 1): 1
+                        #(0, 1, 0): "?"  #art0
+                        }
 
             states[node] = code_map.get((a, b, c), states.get(node))
 
@@ -201,7 +228,7 @@ def mp_basin(attractors, MBN, size):
         boa.append([s, len(states)/size*100])
     return boa
 
-def reachability(name, reach, model, lm):
+def reachability(name, reach, model, lm, mj_list = []):
     """
     Assess the existence of a trajectory from an initial state to a fixed point.
 
@@ -221,7 +248,7 @@ def reachability(name, reach, model, lm):
         elif lm == "mp":
             init[key] = f"INIT {subspace2proposition(model, bool_to_jmp(value[0], name))}"
         elif lm == "mv":
-            init[key] = f"INIT {subspace2proposition(model, bool_to_mv(value[0], name))}"
+            init[key] = f"INIT {subspace2proposition(model, bool_to_mv(value[0], name, mj_list))}"
 
     answer = {}
     for key, value in reach.items():
@@ -231,7 +258,7 @@ def reachability(name, reach, model, lm):
         elif lm == "mp":
             attr_state = bool_to_jmp(value[1], name)
         elif lm == "mv":
-            attr_state = bool_to_mv(value[1], name)
+            attr_state = bool_to_mv(value[1], name, mj_list)
 
         specification = f"CTLSPEC EF({subspace2proposition(model, attr_state)})"
         res = model_checking(model, "asynchronous", init[key], specification)
@@ -246,10 +273,66 @@ def mp_reach(reach, MBN):
         answer[key].append(res)
     return answer
 
+#def path_generated_rules(model_asyn, set_j, model_pmp, model_name, trajectories):
+#    NODES = list(model_asyn)
+#    TARGETS = prime_implicants.find_successors(model_asyn, set_j)
+#    DICT = {T[0]: [jmp_to_mv(state2dict(model_pmp, state), model_name, 2) for state in T[1]] for T in trajectories}
+#
+#    NEG = {T: [] for T in TARGETS}
+#    POS = {T: [] for T in TARGETS}
+#
+#    for T in TARGETS:
+#        for D in DICT:
+#            for i in range(1, len(DICT[D])):
+#                current_state = DICT[D][i]
+#                previous_state = DICT[D][i - 1]
+#
+#                if previous_state[T] != current_state[T]:
+#                    copy = previous_state.copy()
+#                    for N in NODES:
+#                        if N not in find_predecessors(model_asyn, [T]):
+#                            del copy[N]
+#                    rule = str(copy).replace(",", " and").strip("{}\"")
+#                    if current_state[T] < previous_state[T] :
+#                        NEG[T].append(rule)
+#                    elif current_state[T] > previous_state[T]:
+#                        POS[T].append(rule)
+#
+#    for T in TARGETS:
+#        for ruleset in (NEG[T], POS[T]):
+#            for i, rule in enumerate(ruleset):
+#                for N in NODES:
+#                    if N in set_j:
+#                        rule = rule.replace(f"'{N}': 1", N + "_1").replace(f"'{N}': 0", f"(!{N}_1 & !{N}_2)").replace(f"'{N}': 2", N + "_2").replace("and", "&")
+#                    else:
+#                        rule = rule.replace(f"'{N}': 1", N).replace(f"'{N}': 0", "!" + N).replace("and", "&")
+#                ruleset[i] = rule
+#
+#    RULES = {}
+#    for T in TARGETS:
+#        neg_rule = ") | !(".join(NEG[T])
+#        pos_rule = ") | (".join(POS[T])
+#        dnf = get_dnf(model_asyn[T][1])
+#        for N in set_j:
+#            dnf = dnf.replace(f"{N}", N + "_2")
+#
+#        if pos_rule:
+#            pos_rule = ") | (".join([pos_rule, dnf])
+#        else:
+#            pos_rule = dnf
+#
+#        if neg_rule and pos_rule:
+#            RULES[T] = f"(({pos_rule})) & (!({neg_rule}))"
+#        else:
+#            RULES[T] = f"(({pos_rule}))" or f"(!({neg_rule}))"
+#        RULES[T] = minimize_espresso(RULES[T])
+#
+#    return RULES
+
 def path_generated_rules(model_asyn, set_j, model_pmp, model_name, trajectories):
     NODES = list(model_asyn)
     TARGETS = prime_implicants.find_successors(model_asyn, set_j)
-    DICT = {T[0]: [jmp_to_mv(state2dict(model_pmp, state), model_name, 2) for state in T[1]] for T in trajectories}
+    DICT = {T[0]: [jmp_to_jmp(state2dict(model_pmp, state)) for state in T[1]] for T in trajectories}
 
     NEG = {T: [] for T in TARGETS}
     POS = {T: [] for T in TARGETS}
@@ -258,36 +341,48 @@ def path_generated_rules(model_asyn, set_j, model_pmp, model_name, trajectories)
         for D in DICT:
             for i in range(1, len(DICT[D])):
                 current_state = DICT[D][i]
-                previous_state = DICT[D][i - 1]
+                previous_state = DICT[D][i-1]
 
-                if previous_state[T] != current_state[T]:
-                    copy = previous_state.copy()
-                    for N in NODES:
-                        if N not in find_predecessors(model_asyn, [T]):
-                            del copy[N]
-                    rule = str(copy).replace(",", " and").strip("{}\"")
-                    if current_state[T] == 0:
-                        NEG[T].append(rule)
-                    else:
-                        POS[T].append(rule)
+                state_transition = (previous_state[T], current_state[T])
+                copy = previous_state.copy()
+                for N in NODES:
+                    if N not in find_predecessors(model_asyn, [T]):
+                        del copy[N]
+                rule = str(copy).replace(",", " and").strip("{}\"")
+
+                if state_transition in [(1,0)]:
+                    NEG[T].append(rule)
+                elif state_transition in [(0,1)]:
+                    POS[T].append(rule)
 
     for T in TARGETS:
         for ruleset in (NEG[T], POS[T]):
             for i, rule in enumerate(ruleset):
                 for N in NODES:
-                    rule = rule.replace(f"'{N}': 1", N).replace(f"'{N}': 0", "!" + N).replace(f"'{N}': 2", N + "_2").replace("and", "&")
-                ruleset[i] = rule
+                    if N in set_j:
+                        rule = rule.replace(f"'{N}': 1", N).replace(f"'{N}': 'i'", N + "_i").replace(f"'{N}': 0", f"(!{N}_i & !{N}_d & !{N})").replace(f"'{N}': 'd'", N + "_d")
+                    else:
+                        rule = rule.replace(f"'{N}': 1", N).replace(f"'{N}': 0", "!" + N)
+                ruleset[i] = rule.replace("and", "&")
 
     RULES = {}
     for T in TARGETS:
-        neg_rule = " | ".join(NEG[T])
-        pos_rule = " | ".join(POS[T])
+        neg_rule = ") | !(".join(NEG[T])
+        pos_rule = ") | (".join(POS[T])
+        dnf = get_dnf(model_asyn[T][1])
+#        for N in set_j:
+#            dnf = dnf.replace(f"{N}", N + "_1")
+
+        if pos_rule:
+            pos_rule = ") | (".join([pos_rule, dnf])
+        else:
+            pos_rule = dnf
 
         if neg_rule and pos_rule:
-            RULES[T] = f"({pos_rule}) & !({neg_rule})"
+            RULES[T] = f"(({pos_rule})) & (!({neg_rule}))"
         else:
-            RULES[T] = pos_rule or f"!({neg_rule})"
-        RULES[T] = minimize_espresso(RULES[T], merge=True, equiv=True, exact=True, reduce=True)
+            RULES[T] = f"(({pos_rule}))" or f"(!({neg_rule}))"
+        RULES[T] = minimize_espresso(RULES[T])
 
     return RULES
 
@@ -306,3 +401,41 @@ def empty_folder_except(folder_path, files_to_keep):
             file_path = os.path.join(folder_path, file_name)
             if os.path.isfile(file_path):
                 os.remove(file_path)
+
+
+def similarity_score(list1, list2):
+    # Convert the list to a string for comparison
+    str1 = ' '.join(list1)
+    str2 = ' '.join(list2[0])
+
+    # Calculate the similarity score based on the number of common characters
+    common_chars = set(str1) & set(str2)
+    score = len(common_chars) / max(len(str1), len(str2))
+    return score
+
+def most_similar_lists(reference_list, dicts):
+    max_score = -1
+    most_similar = []
+
+    for key, other_list in dicts.items():
+        score = similarity_score(reference_list, other_list)
+        if score > max_score:
+            max_score = score
+            most_similar = [(key, other_list)]
+        elif score == max_score:
+            most_similar.append((key, other_list))
+        else:
+            most_similar = []  # Clear the list if a higher score is found
+
+    return most_similar
+
+
+def remove_files_except(to_keep, temp_path, mv_path):
+    similar_keys = [key for key, _ in to_keep]
+    for filename in os.listdir(temp_path):
+        temp_file_path = os.path.join(temp_path, filename)
+        if not any(key in temp_file_path for key in similar_keys):
+            os.remove(temp_file_path)
+        else:
+            mv_file_path = os.path.join(mv_path, filename)
+            os.replace(temp_file_path, mv_file_path)
